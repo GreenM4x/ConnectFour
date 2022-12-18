@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Main {
+public class ConnectFour {
 
     public static final String RED = "\033[0;31m";     // RED
     public static final String GREEN = "\033[0;34m";   //
