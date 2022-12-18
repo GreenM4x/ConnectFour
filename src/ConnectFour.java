@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ConnectFour {
 
     public static final String RED = "\033[0;31m";     // RED
-    public static final String GREEN = "\033[0;34m";   //
+    public static final String BLUE = "\033[0;34m";   // Blue
     public static final String RESET = "\033[0m";       // Reset
 
 
@@ -41,8 +41,8 @@ public class ConnectFour {
 
         while (!gameOver) {
 
-            if (turn) System.out.print("[Player 1] Input Row: ");
-            else System.out.print("[Player 2] Input Row: ");
+            if (turn) System.out.print(RED + "[RED ●] "+ RESET + "Input Row: ");
+            else System.out.print(BLUE + "[BLUE ●] "+ RESET + "Input Row: ");
             int row = sc.nextInt();
 
             switch (row) {
@@ -113,7 +113,7 @@ public class ConnectFour {
         if (turn) {
             game[index[0]][index[1]] = RED + "●" + RESET;
         } else {
-            game[index[0]][index[1]] = GREEN + "●" + RESET;
+            game[index[0]][index[1]] = BLUE + "●" + RESET;
         }
         turn = !turn;
 
