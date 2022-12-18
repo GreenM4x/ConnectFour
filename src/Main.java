@@ -5,15 +5,21 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;34m";   //
+    public static final String RESET = "\033[0m";       // Reset
+
+
+
    public static String[][] game = new String[7][7];
    public static boolean turn = true;
-   public static boolean gameover = false;
+   public static boolean gameOver = false;
 
     public static void main(String[] args){
 
 
         for (String[] fill: game) {
-            Arrays.fill(fill, "▇");
+            Arrays.fill(fill, "●");
         }
         int count = 1;
         for (int i = 0; i < 7; i++) {
@@ -22,6 +28,7 @@ public class Main {
             count++;
 
         }
+
         printGame();
 
         inputRow();
@@ -32,10 +39,10 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        while (!gameover) {
+        while (!gameOver) {
 
             if (turn) System.out.print("[Player 1] Input Row: ");
-            else System.out.println("[Player 2] Input Row: ");
+            else System.out.print("[Player 2] Input Row: ");
             int row = sc.nextInt();
 
             switch (row) {
@@ -78,8 +85,15 @@ public class Main {
         int count = 0;
         int[] x = new int[2];
 
+
         for (String[] field : game) {
-            if (!Objects.equals(field[row], "▇")) {
+            if (!Objects.equals(field[row], "●")) {
+                if (count == 0) {
+                    System.out.println(RED + "[ERROR] This Row is full Please select another Row!" + RESET);
+                    turn  = !turn;
+                    break;
+                }
+
                 count--;
                 break;
             }
@@ -87,6 +101,7 @@ public class Main {
                 count++;
             }
         }
+
         x[0] = count;
         x[1] = row;
 
@@ -96,18 +111,20 @@ public class Main {
     private static void replaceAtIndex(int[] index){
 
         if (turn) {
-            game[index[0]][index[1]] = "X";
-            turn = !turn;
+            game[index[0]][index[1]] = RED + "●" + RESET;
         } else {
-            game[index[0]][index[1]] = "O";
-            turn = !turn;
+            game[index[0]][index[1]] = GREEN + "●" + RESET;
         }
+        turn = !turn;
 
     }
 
     private static void printGame(){
         for (String[] field: game) {
-            System.out.println(Arrays.toString(field));
+            for (String place: field) {
+                System.out.print(place + "\t");
+            }
+            System.out.println();
         }
     }
 
